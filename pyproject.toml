@@ -1,0 +1,9 @@
+[project]
+name = "shopapi"
+version = "0.1.0"
+description = "E-commerce backend built in FastAPI in 20 days"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi[standard]",
+    "pydantic-settings",
+]
