@@ -58,3 +58,6 @@ Product(name="ab", price=-5, category="shoes")
 # ValidationError: 2 validation errors for Product
 #   name: String should have at least 3 characters
 #   price: Input should be greater than 0
+
+
+curl.exe -i -X POST http://127.0.0.1:8000/products -H "Content-Type: application/json" --data "@product.json"
