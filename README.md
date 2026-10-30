@@ -61,3 +61,32 @@ Product(name="ab", price=-5, category="shoes")
 
 
 curl.exe -i -X POST http://127.0.0.1:8000/products -H "Content-Type: application/json" --data "@product.json"
+
+
+# 1. Raw SQL string, sent with a driver such as asyncpg
+rows = await conn.fetch(
+    "SELECT id, name, price FROM products WHERE category_id = $1 AND price < $2 ORDER BY price",
+    1, 3000,
+)
+
+# 2. SQLAlchemy ORM: Python expressions, SQLAlchemy writes the SQL
+stmt = (
+    select(Product)
+    .where(Product.category_id == 1, Product.price < 3000)
+    .order_by(Product.price)
+)
+products = (await db.scalars(stmt)).all()   # a list of Product objects
+
+
+
+async def get_db() -> AsyncIterator[AsyncSession]:
+    async with SessionLocal() as session:
+        before
+        yield session
+        end
+
+@router.get("/{product_id}")
+async def get_product(product_id: int, db: Annotated[AsyncSession, Depends(get_db)]):
+    ...
+
+• The code before yield runs before the endpoint; the code after it (here, the end of async with, which closes the session) runs after the response is ready.
