@@ -90,3 +90,19 @@ async def get_product(product_id: int, db: Annotated[AsyncSession, Depends(get_d
     ...
 
 • The code before yield runs before the endpoint; the code after it (here, the end of async with, which closes the session) runs after the response is ready.
+
+
+alembic init -t async migrations
+
+alembic.ini in the project root, and env.py, script.py.mako and an empty versions folder inside the target folder.
+
+alembic revision --autogenerate -m "create categories and products"
+alembic upgrade head
+alembic current
+
+
+docker compose exec postgres psql -U shop -d shopapi -c "\dt"
+docker compose exec postgres psql -U shop -d shopapi -c "\d products"
+
+
+fastapi dev app/main.py

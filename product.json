@@ -2,6 +2,6 @@
   "name": "Running shoes",
   "description": "Lightweight trainers",
   "price": 2499,
-  "category": "shoes",
+  "category_id": 1,
   "cost_price": 1500
 }
