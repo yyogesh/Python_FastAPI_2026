@@ -22,6 +22,8 @@ class Product(Base):
     description: Mapped[str | None] = mapped_column(String(1000))
     price: Mapped[Decimal] = mapped_column(Numeric(10, 2))
     cost_price: Mapped[Decimal | None] = mapped_column(Numeric(10, 2))
+    stock: Mapped[int] = mapped_column(server_default="0")
+
     category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"), index=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 

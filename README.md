@@ -106,3 +106,19 @@ docker compose exec postgres psql -U shop -d shopapi -c "\d products"
 
 
 fastapi dev app/main.py
+
+
+function api($method, $path, $body) {
+    $url = "http://127.0.0.1:8000$path"
+    if ($body) {
+        $body | curl.exe -s -w "  -> %{http_code}`n" -X $method $url -H "Content-Type: application/json" --data "@-"
+    } else {
+        curl.exe -s -w "  -> %{http_code}`n" -X $method $url
+    }
+}
+
+api POST /categories '{"name": "shoes"}'
+api POST /categories '{"name": "shoes"}'
+
+
+app.add_exception_handler(DomainError, domain_error_handler)
